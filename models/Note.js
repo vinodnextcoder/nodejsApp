@@ -13,6 +13,14 @@ const NoteSchema = new Schema(
     user: {
       type: String,
       required: true
+    },
+    status: {
+      type: Boolean,
+      default:false
+    },
+    approval: {
+      type: Boolean,
+      default:false
     }
   },
   {

@@ -77,4 +77,15 @@ notesCtrl.deleteNote = (req, res) => {
       return res.redirect("/notes");
     });
 };
+notesCtrl.updateStatus = (req, res) => {
+  // const { title, description } = req.body;
+  Note.findByIdAndUpdate(req.params.id, { status:true })
+    .then(note => {
+      req.flash("success_msg", "Note Updated Successfully");
+      res.redirect("/notes");
+    }).catch(err => {
+      req.flash("success_msg", "Note Updated Failed");
+      return res.redirect("/notes");
+    });
+};
 module.exports = notesCtrl;
