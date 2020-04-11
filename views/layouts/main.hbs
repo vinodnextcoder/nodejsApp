@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     <!-- CUSTOM CSS -->
     <link rel="stylesheet" href="/css/main.css">
+    <script src="https://cdn.zingchart.com/zingchart.min.js"></script>
   </head>
   <body>
 
@@ -20,7 +21,72 @@
       {{> errors }}
       {{{ body }}}
     </main>
-
+    {{!-- <div id="myChart" class="chart--container"></div> --}}
+  <script>
+    ZC.LICENSE = ["569d52cefae586f634c54f86dc99e6a9", "b55b025e438fa8a98e32482b5f768ff5"]; // window.onload event for Javascript to run after HTML
+    // because this Javascript is injected into the document head
+    window.addEventListener('load', () => {
+      // Javascript code to execute after DOM content
+ 
+      // full ZingChart schema can be found here:
+      // https://www.zingchart.com/docs/api/json-configuration/
+      const myConfig = {
+        type: 'funnel',
+        globals: {
+          fontFamily: 'Georgia'
+        },
+        title: {
+          text: 'A Simple Funnel Chart'
+        },
+        scaleY: {
+          placement: 'opposite',
+          labels: ['Site Visits', 'Trial Downloads', 'Quote Requests', 'Sales'],
+          item: {
+            fontColor: '#999999',
+          }
+        },
+        plot: {
+          valueBox: {
+            text: '%v visitors',
+            placement: 'left-out', //auto/in, top, bottom, left, right, leftout, or rightout
+            fontColor: 'gray',
+            fontSize: 12,
+            fontWeight: 'normal'
+          },
+        },
+        series: [{
+            values: [90],
+            text: 'Site Visits',
+            backgroundColor: '#ff5252'
+          },
+          {
+            values: [60],
+            text: 'Trial Downloads',
+            backgroundColor: '#ffab40'
+          },
+          {
+            values: [30],
+            text: 'Quote Requests',
+            backgroundColor: '#eeff41'
+          },
+          {
+            values: [7],
+            text: 'Sales',
+            backgroundColor: '#b2ff59'
+          }
+        ]
+      };
+ 
+      // render chart with width and height to
+      // fill the parent container CSS dimensions
+      zingchart.render({
+        id: 'myChart',
+        data: myConfig,
+        height: '100%',
+        width: '100%'
+      });
+    });
+  </script>
     <!-- Scritps -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>

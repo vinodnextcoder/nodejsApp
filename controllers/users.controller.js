@@ -131,4 +131,14 @@ usersCtrl.logout = (req, res) => {
   req.flash("success_msg", "You are logged out now.");
   res.redirect("/users/signin");
 };
+usersCtrl.findAllUser = (req, res) => {
+  User.find()
+    .then(users => {
+      res.render("notes/edit-note.hbs", { users });
+    }).catch(err => {
+      res.status(500).send({
+        message: err.message
+      });
+    });
+};
 module.exports = usersCtrl;

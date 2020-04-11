@@ -19,6 +19,7 @@
           <i class="fa fa-check-square" style="color:#008000;"></i></button>
         </form>
         {{/if}}
+        
         <form action="/notes/delete/{{_id}}?_method=DELETE" method="POST">
           <input type="hidden" name="_method" value="DELETE">
           <button type="submit" class="btn">
@@ -26,6 +27,7 @@
         </form>
        
         
+
       </div>
     </div>
   </div>
@@ -39,3 +41,4 @@
   </div>
   {{/each}}
 </div>
+  

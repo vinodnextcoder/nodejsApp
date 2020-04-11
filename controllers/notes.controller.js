@@ -1,6 +1,8 @@
 const notesCtrl = {};
 const Note = require("../models/Note");
 const moment = require('moment');
+var async = require("async");
+const User = require('../models/User');
 notesCtrl.renderNoteForm = (req, res) => {
   res.render("notes/new-note");
 };
@@ -44,18 +46,16 @@ notesCtrl.renderNotes = (req, res) => {
     });
 };
 notesCtrl.renderEditForm = (req, res) => {
-  Note.findById(req.params.id)
-    .then(note => {
-      if (note.user != req.user.id) {
-        req.flash("error_msg", "Not Authorized");
-        return res.redirect("/notes");
-      }
-      res.render("notes/edit-note", { note });
-    }).catch(err => {
-      req.flash("error_msg", "Not Authorized");
-      return res.redirect("/notes");
-    });
+  async.waterfall([
+    (callback) => { return callback(null,req.params); },
+    myFirstFunction,
+    mySecondFunction
+  ], function(err, result) {
+    res.render("notes/edit-note", { notes:result });
+  });
+  
 };
+
 notesCtrl.updateNote = (req, res) => {
   const { title, description } = req.body;
   Note.findByIdAndUpdate(req.params.id, { title, description })
@@ -88,4 +88,28 @@ notesCtrl.updateStatus = (req, res) => {
       return res.redirect("/notes");
     });
 };
+function myFirstFunction(data, callback) {
+  Note.findById({_id:data.id})
+    .then(note => {
+      callback(null,note)
+    }).catch(err => {
+      callback(null,[])
+    });
+}
+function mySecondFunction(data, callback) {
+  User.find({}, { name: 1 }).limit(2).lean()
+    .then(users => {
+      let obj = {
+        note: data,
+        user: users
+      }
+      callback(null, obj)
+    }).catch(err => {
+      let obj = {
+        note: data,
+        user: users
+      }
+      callback(null, obj)
+    });
+}
 module.exports = notesCtrl;

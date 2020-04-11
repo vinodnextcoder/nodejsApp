@@ -7,3 +7,27 @@ body {
 .logo {
   width: 30%;
 }
+
+.zc-body {
+  background: #fff;
+}
+
+.chart--container {
+  height: 100%;
+  width: 100%;
+  min-height: 600px;
+}
+
+.zc-ref {
+  display: none;
+}
+.chart--container {
+  height: 100%;
+  width: 100%;
+  min-height: 600px;
+}
+
+.zc-ref {
+  display: none;
+}
+ 
