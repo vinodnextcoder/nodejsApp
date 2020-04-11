@@ -4,26 +4,26 @@
     <div class="card">
       <div class="card-body">
         <h5 class="card-title d-flex justify-content-between align-items-center">
-          {{ title }} <a href="/notes/edit/{{_id}}"><i class="fas fa-edit"></i></a>
+          {{ title }} <a href="/notes/edit/{{_id}}"><i class="fas fa-edit" title="Edit Task"></i></a>
         </h5>
         <p class="card-text">{{ description }} </p>
       </div>
       <div class="card-footer d-flex justify-content-between align-items-center">{{ date }}
          {{#if status}}
          <button type="submit" class="btn">
-          <i class="fa fa-window-close" style="color:#FF5733;"></i></button>
+          <i class="fa fa-window-close" title="Close Task" style="color:#FF5733;"></i></button>
         {{else}}
         <form action="/notes/statusUpdate/{{_id}}" method="POST">
           <input type="hidden" name="_method" value="POST">
           <button type="submit" class="btn">
-          <i class="fa fa-check-square" style="color:#008000;"></i></button>
+          <i class="fa fa-check-square" title="Open Task" style="color:#008000;"></i></button>
         </form>
         {{/if}}
         
         <form action="/notes/delete/{{_id}}?_method=DELETE" method="POST">
           <input type="hidden" name="_method" value="DELETE">
           <button type="submit" class="btn">
-          <i class="fa fa-trash"></i></button>
+          <i class="fa fa-trash"  title="Delete Task" style="color:rgb(8, 8, 8);"></i></button>
         </form>
        
         

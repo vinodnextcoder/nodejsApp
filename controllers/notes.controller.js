@@ -47,18 +47,24 @@ notesCtrl.renderNotes = (req, res) => {
 };
 notesCtrl.renderEditForm = (req, res) => {
   async.waterfall([
-    (callback) => { return callback(null,req.params); },
+    (callback) => { return callback(null, req.params); },
     myFirstFunction,
     mySecondFunction
-  ], function(err, result) {
-    res.render("notes/edit-note", { notes:result });
+  ], function (err, result) {
+    res.render("notes/edit-note", { notes: result });
   });
-  
+
 };
 
 notesCtrl.updateNote = (req, res) => {
-  const { title, description } = req.body;
-  Note.findByIdAndUpdate(req.params.id, { title, description })
+  const { title, description, userid } = req.body;
+  let obj = {
+    "$addToSet": { "contributor": { "$each": [userid] } },
+    "$set": {
+      title, description
+    }
+  }
+  Note.findByIdAndUpdate(req.params.id, obj)
     .then(note => {
       req.flash("success_msg", "Note Updated Successfully");
       res.redirect("/notes");
@@ -79,7 +85,7 @@ notesCtrl.deleteNote = (req, res) => {
 };
 notesCtrl.updateStatus = (req, res) => {
   // const { title, description } = req.body;
-  Note.findByIdAndUpdate(req.params.id, { status:true })
+  Note.findByIdAndUpdate(req.params.id, { status: true })
     .then(note => {
       req.flash("success_msg", "Note Updated Successfully");
       res.redirect("/notes");
@@ -89,11 +95,11 @@ notesCtrl.updateStatus = (req, res) => {
     });
 };
 function myFirstFunction(data, callback) {
-  Note.findById({_id:data.id})
+  Note.findById({ _id: data.id })
     .then(note => {
-      callback(null,note)
+      callback(null, note)
     }).catch(err => {
-      callback(null,[])
+      callback(null, [])
     });
 }
 function mySecondFunction(data, callback) {

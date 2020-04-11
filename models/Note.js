@@ -18,6 +18,7 @@ const NoteSchema = new Schema(
       type: Boolean,
       default:false
     },
+    contributor: [],
     approval: {
       type: Boolean,
       default:false
