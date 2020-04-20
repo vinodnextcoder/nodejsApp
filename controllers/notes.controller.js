@@ -32,7 +32,7 @@ notesCtrl.createNewNote = (req, res) => {
   }
 };
 notesCtrl.renderNotes = (req, res) => {
-  Note.find()
+  Note.find({user:req.user.id})
     .then(notes => {
       notes.forEach(function (item) {
         var date = moment(item.createdAt, "YYYYMMDD").fromNow();
@@ -118,4 +118,28 @@ function mySecondFunction(data, callback) {
       callback(null, obj)
     });
 }
+notesCtrl.renderNotesgrids = (req, res) => {
+  Note.find({user:req.user.id})
+    .then(notes => {
+      var temp=[]
+      notes.forEach(function (item) {
+        let obj={}
+        var date = moment(item.createdAt, "YYYYMMDD").fromNow();
+        item.date = date
+       
+        obj={
+          title:item.title,
+          description:item.description,
+          Created:item.date
+        }
+        temp.push(obj)
+      });
+     temp=JSON.stringify(temp)
+      res.render("notes/notesgrids", { temp });
+    }).catch(err => {
+      res.status(500).send({
+        message: err.message
+      });
+    });
+};
 module.exports = notesCtrl;
