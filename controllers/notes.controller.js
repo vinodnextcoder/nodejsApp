@@ -103,7 +103,7 @@ function myFirstFunction(data, callback) {
     });
 }
 function mySecondFunction(data, callback) {
-  User.find({}, { name: 1 }).limit(2).lean()
+  User.find({}, { name: 1 }).limit(10).lean()
     .then(users => {
       let obj = {
         note: data,
@@ -126,7 +126,6 @@ notesCtrl.renderNotesgrids = (req, res) => {
         let obj={}
         var date = moment(item.createdAt, "YYYYMMDD").fromNow();
         item.date = date
-       
         obj={
           title:item.title,
           description:item.description,
@@ -136,6 +135,29 @@ notesCtrl.renderNotesgrids = (req, res) => {
       });
      temp=JSON.stringify(temp)
       res.render("notes/notesgrids", { temp });
+    }).catch(err => {
+      res.status(500).send({
+        message: err.message
+      });
+    });
+};
+notesCtrl.renderNotesNetwork = (req, res) => {
+  Note.find({user:req.user.id})
+    .then(notes => {
+      var temp=[]
+      notes.forEach(function (item) {
+        let obj={}
+        var date = moment(item.createdAt, "YYYYMMDD").fromNow();
+        item.date = date
+        obj={
+          title:item.title,
+          description:item.description,
+          Created:item.date
+        }
+        temp.push(obj)
+      });
+     temp=JSON.stringify(temp)
+      res.render("notes/notesnetwork", { temp });
     }).catch(err => {
       res.status(500).send({
         message: err.message

@@ -10,7 +10,8 @@ const {
   updateNote,
   deleteNote,
   updateStatus,
-  renderNotesgrids
+  renderNotesgrids,
+  renderNotesNetwork
 } = require("../controllers/notes.controller");
 
 // Helpers
@@ -37,5 +38,6 @@ router.delete("/notes/delete/:id", isAuthenticated, deleteNote);
 router.post("/notes/statusUpdate/:id", isAuthenticated, updateStatus);
 
 router.get("/notesgrid", isAuthenticated, renderNotesgrids);
+router.get("/NotesNetwork", isAuthenticated, renderNotesNetwork);
 
 module.exports = router;

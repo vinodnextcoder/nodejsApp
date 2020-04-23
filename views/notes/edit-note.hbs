@@ -8,7 +8,7 @@
 {{/each}}
 
 <div class="col-md-4 mx-auto">
-  <div class="card">
+  <div class="card edtCrd">
 
     {{!-- <p>{{notes.note}}</p> --}}
 
@@ -20,19 +20,25 @@
       <form action="/notes/edit-note/{{notes.note._id}}?_method=PUT" method="POST">
         <input type="hidden" name="_method" value="PUT">
         <div class="form-group">
+          <b>Title:</b>
           <input type="text" name="title" class="form-control" value="{{notes.note.title}}" />
         </div>
         <div class="form-group">
+          <b>Description:</b>
           <textarea name="description" class="form-control">{{notes.note.description}}</textarea>
         </div>
-        <div class="form-group">
-          <label for="cars">User List:</label>
-          <select id="cars" name="userid">
+
+        
+        <div class="form-group ">
+          <h4>User List</h4>
+          <select class="mainselection" id="cars" name="userid">
             {{#each notes.user}}
             <option value={{_id}}>{{name}}</option>
             {{/each}}
           </select>
-        </div>
+        </div> 
+
+        
         <div class="form-group">
           <button class="btn btn-primary btn-block" type="submit">
             Save
