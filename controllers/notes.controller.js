@@ -142,26 +142,50 @@ notesCtrl.renderNotesgrids = (req, res) => {
     });
 };
 notesCtrl.renderNotesNetwork = (req, res) => {
-  Note.find({user:req.user.id})
+  Note.find({ user: req.user.id })
     .then(notes => {
-      var temp=[]
+      var temp = []
+      var c = 0;
       notes.forEach(function (item) {
-        let obj={}
-        var date = moment(item.createdAt, "YYYYMMDD").fromNow();
-        item.date = date
-        obj={
-          title:item.title,
-          description:item.description,
-          Created:item.date
+        c += 1
+        let obj = {}
+        obj = {
+          label: item.title,
+          id: c,
+          
+          arrows: 'to, from'
         }
         temp.push(obj)
       });
-     temp=JSON.stringify(temp)
-      res.render("notes/notesnetwork", { temp });
+      var count = 0
+      if (temp.length) {
+        count = temp.length + 1
+        let obj = {
+          label: "User Tasks",
+          id: count
+        }
+        temp.push(obj)
+      }
+      let Edge = [];
+      temp.forEach(function (item) {
+        let obj = {};
+        if (count != item.id) {
+          obj = {
+            from: count,
+            to: item.id
+          }
+          Edge.push(obj);
+        }
+      });
+
+      temp = JSON.stringify(temp)
+      Edge = JSON.stringify(Edge)
+
+      res.render("notes/notesnetwork", { temp, Edge });
     }).catch(err => {
       res.status(500).send({
         message: err.message
       });
     });
-};
+}; 
 module.exports = notesCtrl;

@@ -40,4 +40,5 @@ router.post("/notes/statusUpdate/:id", isAuthenticated, updateStatus);
 router.get("/notesgrid", isAuthenticated, renderNotesgrids);
 router.get("/NotesNetwork", isAuthenticated, renderNotesNetwork);
 
+
 module.exports = router;

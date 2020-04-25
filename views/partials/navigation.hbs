@@ -14,10 +14,11 @@
         {{#if user}}
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Notes 
+              {{ user.name }}
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
               <a class="dropdown-item" href="/notes">All Notes</a>
+              <a class="dropdown-item" href="/usrDetails">Profile</a>
               <a class="dropdown-item" href="/notesgrid">All Notes List</a>
               <a class="dropdown-item" href="/NotesNetwork">All Notes network</a>
               <a class="dropdown-item" href="/notes/add">Add A Note</a>
@@ -26,12 +27,21 @@
             </div>
           </li>
         {{else}}
-          <li class="nav-item">
-            <a class="nav-link" href="/users/signin">Login</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/users/signup">Register</a>
-          </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#firstSec" style="color:white; font-weight:bold">Features</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#secondSec" style="color:white; font-weight:bold">For Team</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#thirdSec" style="color:white; font-weight:bold">Bussiness Report</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/users/signin">Login</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/users/signup">Register</a>
+        </li>
         {{/if}}
       </ul>
     </div>

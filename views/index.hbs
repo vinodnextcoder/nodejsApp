@@ -18,9 +18,9 @@
           <div class="section-img-wrap">
             <img src="/img/control_task.svg" alt="" height="400" width="600">
           </div>
-        {{!--  <a href="#secondSec">Click Me Smooth Scroll to Section 2 Below</a> --}}
         </div>
-  	</div>
+  	  </div>
+    <div class="scrollMe"><a href="#secondSec" style="color:black;">Click Me </a></div>
 </section>
 <section class="section container section-important" id="secondSec" >
     <div class="row text-sm-left text-sm-left text-right">
@@ -37,7 +37,7 @@
             <p class="section-text">
                 Never lose track of important emails, action items from meeting notes, or Trello cards. VS InfoTech <strong>keeps</strong> your prefered task manager (Todoist, Wunderlist) <strong>updated with all your tasks</strong> from all your different applications.
             </p>
-             {{!--<a href="#firstSec">Click Me </a>--}} 
+            <a href="#thirdSec" style="color:black;">Click Me </a> 
           </div>
         </div>
     </div>
@@ -46,7 +46,7 @@
 
 <section class="section container section-always-know">
   <div class="row">
-    <div class="col-md-6 col-sm-6 col-xs-12 section__content--left">
+    <div class="col-md-6 col-sm-6 col-xs-12 section__content--left" id="thirdSec">
       <div class="section__text-block">
         <span class="section-subtitle mr-0">Always know</span><br>
         <h3 class="section-title mr-t-0 mb-2"><strong>what’s next </strong></h3>
@@ -56,8 +56,9 @@
             You <span class="bold-text">always know what’s on top</span> of the list based on due dates and priorities, no matter where the task came from. <br>
         </p>
 
-        <a href="/users/signup"><button data-toggle="modal" data-target="#sign-in-modal" class="btn btn-success ">Get started  - it’s free </button></a>
-      </div>
+        {{!-- <a href="/users/signup"><button data-toggle="modal" data-target="#sign-in-modal" class="btn btn-success ">Get started  - it’s free </button></a> --}}
+      </div></br>
+      <div class="scrollMe"><a href="#firstSec" style="color:black;">Click Me </a></div>
     </div>
     <div class="col-md-6 col-sm-6 col-xs-12 section__content--right">
       <div class="section-img-wrap">
