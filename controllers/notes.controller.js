@@ -188,4 +188,13 @@ notesCtrl.renderNotesNetwork = (req, res) => {
       });
     });
 }; 
+notesCtrl.findeNote = (req, res) => {
+  Note.findById(req.params.id, obj)
+    .then(note => {
+      res.send(note);
+    }).catch(err => {
+      req.flash("success_msg", "Note Updated Failed");
+      return res.redirect("/notes");
+    });
+};
 module.exports = notesCtrl;
